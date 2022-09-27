@@ -17,7 +17,8 @@ int main(void)
 			printf("NOW i=%d & j=%d... ", i, j);
 			fflush(stdout);
 		}
-		printf("NOW THAT i=%d & y=%d, it's time for a new line...\n", i, j);
+		printf("NOW THAT i=%d & j=%d, it's time for a new line...\n", i, j);
     }
+	printf("AND FINALLY, i=%d & j=%d... That's it!\n", i, j);
 	return(0);
 }
