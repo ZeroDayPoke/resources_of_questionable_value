@@ -21,5 +21,10 @@ int main(void)
   printf("%p\n", &n);
   printf("%p\n", &p);
   printf("%p\n", &(a[0]));
+  printf("%p\n", &(a[1]));
+  printf("%p\n", &(a[2]));
+  printf("%p\n", &(a[3]));
+  printf("%p\n", &(a[4]));
+  printf("%p\n", &n + 5);
   return (0);
 }
