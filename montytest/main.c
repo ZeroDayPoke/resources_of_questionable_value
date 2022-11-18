@@ -15,8 +15,10 @@ int main(int argc, char *argv[])
 	char *line;
 
 	if (argc != 2)
-		errHand(1);
+		errHand(1, "NA", 0);
 	inboundFD = fopen(argv[1], "r");
+	if (!(inboundFD))
+		errHand(2, argv[1], 0);
 	while ((c = fgetc(inboundFD)) != EOF)
 		if (c == '\n')
 			lineTotes++;
@@ -34,7 +36,7 @@ int main(int argc, char *argv[])
 			i++;
 			j = 0;
 		}
-		else
+		else if (c != ' ' && c != '\t')
 		{
 			line[j] = c;
 			j++;
@@ -43,6 +45,7 @@ int main(int argc, char *argv[])
 	line[j] = '\0';
 	theGrail[i] = strdup(line);
 	fclose(inboundFD);
+	free(line);
 	op_fun_res(lineTotes);
 	free(theGrail);
 	exit(EXIT_SUCCESS);
