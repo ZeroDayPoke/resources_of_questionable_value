@@ -4,7 +4,8 @@ char **theGrail = NULL;
 
 /**
  * main - Entry point for monty
- * Description: coming soon
+ * @argc: arg count
+ * @argv: array of arg pointers
  * Return: Always 0 (Success)
  */
 int main(int argc, char *argv[])
@@ -47,6 +48,5 @@ int main(int argc, char *argv[])
 	fclose(inboundFD);
 	free(line);
 	op_fun_res(lineTotes);
-	free(theGrail);
-	exit(EXIT_SUCCESS);
+	return (0);
 }

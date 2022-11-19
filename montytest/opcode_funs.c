@@ -1,30 +1,11 @@
 #include "monty.h"
 
-void op_fun_res(unsigned int lineCount)
-{
-	stack_t *dasStack;
-	unsigned int i = 0, j, targetFound;
-	instruction_t betty[] = {{"pall", pall_monty_stack}, {"push", push_monty_stack}};
-
-	dasStack = NULL;
-	for (i = 0; i < lineCount; i++)
-	{
-		targetFound = 0;
-		for (j = 0; j < 2; j++)
-		{
-			if (strncmp(betty[j].opcode, theGrail[i], 4) == 0)
-			{
-				betty[j].f(&dasStack, (i + 1));
-				targetFound = 1;
-			}
-		}
-		if (theGrail[i][0] == '#' || theGrail[i][0] == '\0')
-			targetFound = 1;
-		if (targetFound == 0)
-			errHand(3, theGrail[i], (i + 1));
-	}
-}
-
+/**
+ * push_monty_stack - pushes int to stack
+ * @stack: stack
+ * @line_number: line number
+ * Return: void
+ */
 void push_monty_stack(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode;
@@ -54,6 +35,12 @@ void push_monty_stack(stack_t **stack, unsigned int line_number)
 	*stack = newNode;
 }
 
+/**
+ * pall_monty_stack - pushes int to stack
+ * @stack: stack
+ * @line_number: line number
+ * Return: void
+ */
 void pall_monty_stack(stack_t **stack, unsigned int line_number)
 {
 	stack_t *nodePtr;
@@ -65,4 +52,54 @@ void pall_monty_stack(stack_t **stack, unsigned int line_number)
 		nodePtr = nodePtr->next;
 	}
 	(void)line_number;
+}
+
+/**
+ * pint_monty_stack - pushes int to stack
+ * @stack: stack
+ * @line_number: line number
+ * Return: void
+ */
+void pint_monty_stack(stack_t **stack, unsigned int line_number)
+{
+	if ((*stack) == NULL)
+	{
+		errHand2(5, line_number);
+	}
+	else
+	{
+		printf("%d\n", (*stack)->n);
+	}
+}
+
+/**
+ * nop_monty_stack - pushes int to stack
+ * @stack: stack
+ * @line_number: line number
+ * Return: void
+ */
+void nop_monty_stack(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
+
+/**
+ * pop_monty_stack - pushes int to stack
+ * @stack: stack
+ * @line_number: line number
+ * Return: void
+ */
+void pop_monty_stack(stack_t **stack, unsigned int line_number)
+{
+	stack_t *scrubber;
+
+	(void)line_number;
+	if (!(*stack))
+	{
+		errHand2(6, line_number);
+	}
+	scrubber = *stack;
+	if (scrubber->next)
+		*stack = scrubber->next;
 }

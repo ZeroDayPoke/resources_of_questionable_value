@@ -28,9 +28,9 @@ extern char **theGrail;
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -43,8 +43,8 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /*
@@ -52,10 +52,16 @@ typedef struct instruction_s
  */
 int write_to_SO(char c);
 int write_to_SE(char c);
-void errHand(int eNum, char *errArg, unsigned int lNum);
+void errHand(int errnum, char *errarg, unsigned int lnum);
 void write_error(char *str);
 void op_fun_res(unsigned int lineCount);
 void push_monty_stack(stack_t **stack, unsigned int line_number);
 void pall_monty_stack(stack_t **stack, unsigned int line_number);
+void pint_monty_stack(stack_t **stack, unsigned int line_number);
+void pop_monty_stack(stack_t **stack, unsigned int line_number);
+void swap_monty_stack(stack_t **stack, unsigned int line_number);
+void nop_monty_stack(stack_t **stack, unsigned int line_number);
+void add_monty_stack(stack_t **stack, unsigned int line_number);
+void errHand2(int errnum, unsigned int lnum);
 
 #endif
