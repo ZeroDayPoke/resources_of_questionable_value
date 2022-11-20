@@ -13,24 +13,30 @@ void push_monty_stack(stack_t **stack, unsigned int line_number)
 	char numStr[12];
 	int n;
 
-	newNode = malloc(sizeof(stack_t));
-	if (!newNode)
+	if (!(theGrail[1]))
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_tiktok(stack);
 		exit(EXIT_FAILURE);
 	}
+	newNode = malloc(sizeof(stack_t));
 	if (!((theGrail[1][0] >= '0' && theGrail[1][0] <= '9')
 	|| theGrail[1][0] == '-'))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		free(newNode);
 		free_tiktok(stack);
 		exit(EXIT_FAILURE);
 	}
 	numStr[0] = theGrail[1][0];
-	while (theGrail[1][j] >= '0' && theGrail[1][j] <= '9')
+	while (theGrail[1][j])
 	{
+		if (isdigit(theGrail[1][j]) == 0)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			free(newNode);
+			free_tiktok(stack);
+			exit(EXIT_FAILURE);
+		}
 		numStr[j] = theGrail[1][j];
 		j++;
 	}
@@ -60,7 +66,7 @@ void pall_monty_stack(stack_t **stack, unsigned int line_number)
 		printf("%d\n", nodePtr->n);
 		nodePtr = nodePtr->next;
 	}
-	(void)line_number;
+	(void) line_number;
 }
 
 /**
@@ -90,8 +96,8 @@ void pint_monty_stack(stack_t **stack, unsigned int line_number)
  */
 void nop_monty_stack(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	(void) stack;
+	(void) line_number;
 }
 
 /**
@@ -112,8 +118,6 @@ void pop_monty_stack(stack_t **stack, unsigned int line_number)
 	else
 	{
 		nodeHold = (*stack)->next;
-		free((*stack)->next);
-		free((*stack)->prev);
 		free((*stack));
 		(*stack) = nodeHold;
 	}
